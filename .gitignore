@@ -1,0 +1,73 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media/
+staticfiles/
+.env
+.env.*
+
+*.sql
+
+# Local dev files
+*.sqlite3
+*.local
+*.lock
+
+# Django migrations (optional if you don’t want auto-generated migration history tracked)
+**/migrations/__pycache__/
+**/migrations/*.pyc
+# Uncomment the next line if you want to ignore migration files entirely:
+# **/migrations/*.py
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# Testing
+.coverage
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+pytest_cache/
+
+# Virtualenv
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Node (if frontend is embedded)
+node_modules/
+npm-debug.log
+
+# Docker
+*.pid
+*.tar
+docker-compose.override.yml
+__docker_cache__/
+.docker/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
