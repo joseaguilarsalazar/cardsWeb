@@ -1,0 +1,77 @@
+/* static/css/cards.css */
+.form-card {
+    background: var(--card-bg);
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+}
+
+.form-card h2 {
+    margin-bottom: 24px;
+    font-weight: 500;
+    color: var(--text-main);
+    border-bottom: 2px solid var(--bg-primary);
+    padding-bottom: 12px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-main);
+    font-size: 0.9rem;
+}
+
+textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 14px;
+    margin-bottom: 20px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+}
+
+/* Estilos específicos para mejorar el input de calendario nativo */
+input[type="date"] {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin_top: 10px;
+}
+
+.btn-save {
+    background-color: var(--accent);
+    color: white;
+    padding: 12px 24px;
+    transition: background 0.2s ease;
+}
+
+.btn-save:hover {
+    background-color: #2d3748;
+}
+
+.btn-cancel {
+    background-color: transparent;
+    color: var(--text-muted);
+    padding: 12px 24px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.2s ease;
+}
+
+.btn-cancel:hover {
+    color: var(--error);
+}

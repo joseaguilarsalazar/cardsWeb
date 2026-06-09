@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Panel | Diario Compartido{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+
+    {% include 'sidebar.html' %}
+
+    <main class="main-content">
+        
+        <div class="topbar">
+            <button class="btn-toggle-sidebar" id="toggleSidebarBtn">☰</button>
+            
+            <div class="tab-container">
+                <button class="tab-btn active" onclick="switchTab('mine')">Mis Entradas</button>
+                <button class="tab-btn" onclick="switchTab('partner')">
+                    Diario de {% if pareja %}{{ pareja.username }}{% else %}Solange{% endif %}
+                </button>
+            </div>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div style="background-color: #f0fff4; color: #38a169; padding: 14px; border-radius: 6px; margin-bottom: 24px; border: 1px solid #c6f6d5; max-width: 800px;">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <section class="tab-panel active" id="panel-mine">
+            <div class="diary-grid">
+                {% for entrada in mis_entradas %}
+                    <article class="diary-card">
+                        <div class="diary-card-header">
+                            <div class="card-title-area">
+                                <strong style="color: var(--text-main); font-size: 1.05rem;">{{ entrada.title }}</strong>
+                                <span>{{ entrada.fecha_redaccion|date:"d M, Y" }}</span>
+                            </div>
+                            <a href="{% url 'edit_card' entrada.id %}" class="card-action-btn" title="Editar esta entrada">✏️</a>
+                        </div>
+                        <p style="white-space: pre-line; line-height: 1.6; color: var(--text-main);">{{ entrada.text|truncatechars:100 }}</p>
+                    </article>
+                {% empty %}
+                    <p style="color: var(--text-muted);">Aún no has escrito ninguna entrada. ¡Presiona el botón de la barra lateral!</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="tab-panel" id="panel-partner">
+            <div class="diary-grid">
+                {% for entrada in entradas_pareja %}
+                    
+                    {% if entrada.is_unlocked %}
+                        <article class="diary-card" style="border-left-color: #b794f4;">
+                            <div class="diary-card-header">
+                                <div class="card-title-area">
+                                    <strong style="color: var(--text-main); font-size: 1.05rem;">{{ entrada.title }}</strong>
+                                    <span>{{ entrada.fecha_redaccion|date:"d M, Y" }}</span>
+                                </div>
+                                <a href="{% url 'card_detail' entrada.id %}" class="card-action-btn" title="Leer entrada completa" style="background-color: #f3ebff;">➕</a>
+                            </div>
+                            <p style="white-space: pre-line; line-height: 1.6; color: var(--text-main);">{{ entrada.text|truncatechars:100 }}</p>
+                        </article>
+                    {% else %}
+                        <article class="diary-card locked-teaser">
+                            <div class="locked-overlay">
+                                <div class="locked-badge">
+                                    🔒 Disponible en {{ entrada.dias_restantes }} días
+                                </div>
+                            </div>
+                            <div class="diary-card-header">
+                                <strong class="blurred-text">Título Oculto</strong>
+                                <span style="color: var(--text-muted);">{{ entrada.fecha_redaccion|date:"d M, Y" }}</span>
+                            </div>
+                            <p class="blurred-text" style="line-height: 1.6;">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras porttitor lorem ut ante customized text.
+                            </p>
+                        </article>
+                    {% endif %}
+                    
+                {% empty %}
+                    <p style="color: var(--text-muted);">Tu pareja aún no ha cargado registros o datos disponibles.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script>
+    // La lógica de la interfaz sigue respondiendo perfectamente al componente incluido
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('toggleSidebarBtn');
+
+    toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('hidden');
+    });
+
+    function switchTab(tabName) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+
+        if (tabName === 'mine') {
+            document.querySelectorAll('.tab-btn')[0].classList.add('active');
+            document.getElementById('panel-mine').classList.add('active');
+        } else if (tabName === 'partner') {
+            document.querySelectorAll('.tab-btn')[1].classList.add('active');
+            document.getElementById('panel-partner').classList.add('active');
+        }
+    }
+</script>
+{% endblock %}

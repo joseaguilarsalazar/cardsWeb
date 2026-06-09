@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Recuerdos | Cuestionario Romántico{% endblock %}
+
+{% block extra_css %}
+    {% if request.user.is_authenticated %}
+        <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
+{% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="dashboard-layout">
+    {% include 'sidebar.html' %}
+    <main class="main-content" style="display: flex; align-items: center; justify-content: center;">
+{% endif %}
+
+    <div class="quiz-wrapper">
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div style="background-color: #fff5f5; color: var(--error); padding: 12px; border-radius: 6px; margin-bottom: 20px; font-size: 0.9rem; border: 1px solid #fed7d7;">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="quiz-card">
+            <div class="quiz-progress">Pregunta {{ current_index }} de {{ total_preguntas }}</div>
+            <h2>{{ pregunta.question }}</h2>
+
+            <form method="POST">
+                {% csrf_token %}
+
+                {% if state == 'question' %}
+                    <input type="hidden" name="action" value="submit_answer">
+                    
+                    {% for respuesta in respuestas %}
+                        <div>
+                            <input type="radio" id="ans_{{ respuesta.id }}" name="answer_id" value="{{ respuesta.id }}" style="display: none;" required>
+                            <label class="quiz-option-label" for="ans_{{ respuesta.id }}">
+                                {{ respuesta.answer }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                    
+                    <button type="submit" class="btn-quiz">Responder</button>
+
+                {% else %}
+                    <input type="hidden" name="action" value="continue">
+                    
+                    {% for respuesta in respuestas %}
+                        <div>
+                            <div class="quiz-option-label 
+                                {% if respuesta == selected_answer %}
+                                    {% if respuesta.is_correct %}selected-correct{% else %}selected-incorrect{% endif %}
+                                {% else %}
+                                    disabled-option
+                                {% endif %}">
+                                {{ respuesta.answer }}
+                            </div>
+                            
+                            {% if respuesta == selected_answer and respuesta.text_if_selected %}
+                                <div class="reaction-box {% if respuesta.is_correct %}correct{% else %}incorrect{% endif %}">
+                                    {% if respuesta.is_correct %}🎉{% else %}💙{% endif %} {{ respuesta.text_if_selected }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn-quiz" style="background-color: {% if selected_answer.is_correct %}#38a169{% else %}var(--accent){% endif %};">
+                        {% if selected_answer.is_correct %}
+                            Continuar a la siguiente pregunta →
+                        {% else %}
+                            ↩️ Intentarlo de nuevo
+                        {% endif %}
+                    </button>
+                {% endif %}
+
+            </form>
+        </div>
+    </div>
+
+{% if request.user.is_authenticated %}
+    </main>
+</div>
+{% endif %}
+{% endblock %}

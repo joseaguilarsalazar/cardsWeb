@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ card.title }} | Detalle{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    {% include 'sidebar.html' %}
+
+    <main class="main-content">
+        
+        <div style="margin-bottom: 24px;">
+            <a href="{% url 'home' %}" style="color: var(--text-muted); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+                ← Volver al Inicio
+            </a>
+        </div>
+
+        <article style="background: white; padding: 40px; border-radius: var(--radius); box-shadow: 0 4px 15px rgba(0,0,0,0.02); max-width: 800px; border-top: 5px solid #b794f4;">
+            <header style="border-bottom: 2px solid var(--bg-primary); padding-bottom: 20px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                    <h1 style="font-size: 1.8rem; font-weight: 500; color: var(--text-main); margin-bottom: 6px;">{{ card.title }}</h1>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Escrito por: <strong>{{ card.owner.username }}</strong></p>
+                </div>
+                <span style="background-color: var(--bg-primary); color: var(--text-muted); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
+                    📅 {{ card.fecha_redaccion|date:"d \d\e F, Y" }}
+                </span>
+            </header>
+
+            <p style="white-space: pre-line; line-height: 1.8; color: var(--text-main); font-size: 1.1rem;">{{ card.text }}</p>
+        </article>
+
+    </main>
+</div>
+{% endblock %}

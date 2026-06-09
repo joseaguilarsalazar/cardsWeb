@@ -1,0 +1,153 @@
+[
+    {
+        "question": "¿Qué te invité a comer el día que me invitaste a esa 'reunión tranquila' con tus amigos y salimos porque se pusieron a hacer una fiesta?",
+        "answers": [
+            {
+                "answer": "Una hamburguesa del Totes",
+                "is_correct": true,
+                "text_if_selected": "Recuerdo perfectamente que esa noche, cuando nos fuimos a hablar largo rato en la plaza Serafín, me di cuenta por primera vez de lo mucho que me gustaba conversar contigo. Es algo que nunca quiero olvidar. 🍔🌟🌌✨💖"
+            },
+            {
+                "answer": "Una salchipapa",
+                "is_correct": false,
+                "text_if_selected": "Nope. Eso fue cuando pedimos por delivery de Banana Creps para comer en tu casa. 🥞🍌🏠"
+            },
+            {
+                "answer": "Una pizza",
+                "is_correct": false,
+                "text_if_selected": "Hasta donde yo me acuerdo, nunca hemos comido pizza juntos... ¿De quién te estarás acordando? 🍕👀🤨"
+            },
+            {
+                "answer": "Un helado",
+                "is_correct": false,
+                "text_if_selected": "Te he invitado helado un montón de veces, pero no fue precisamente la comida de esa noche. 🍦🍨"
+            },
+            {
+                "answer": "Un bubble tea",
+                "is_correct": false,
+                "text_if_selected": "No, incorrecto. Eso fue el día que fuimos al mall. 🛍️"
+            }
+        ]
+    },
+    {
+        "question": "¿A qué personaje de caricatura me comparabas a cada rato?",
+        "answers": [
+            {
+                "answer": "Simón (Alvin y las ardillas)",
+                "is_correct": true,
+                "text_if_selected": "Aún me sigue pareciendo gracioso que creas que me parezco a esa ardilla. Sé que para ti es un cumplido... ¿verdad? 🐿️🤓"
+            },
+            {
+                "answer": "Arisu (Alice in Borderland)",
+                "is_correct": false,
+                "text_if_selected": "Si alguna vez me comparaste con él, la verdad es que no me acuerdo... 🃏📺🧐"
+            },
+            {
+                "answer": "Nunca me comparaste con un personaje de caricatura",
+                "is_correct": false,
+                "text_if_selected": "A ver... ¿tienes Alzheimer o? Ve a checarte esa cabecita. 🧠🔍🤦‍♂️🤣"
+            },
+            {
+                "answer": "Colin Bridgerton",
+                "is_correct": false,
+                "text_if_selected": "Me dijiste que hablo de forma parecida a él, pero no me refería a eso. ☕🎩📖"
+            },
+            {
+                "answer": "Ryland Grace (Project Hail Mary)",
+                "is_correct": false,
+                "text_if_selected": "¡¿A quién habrás comparado tú con el profesor Ryland?! 👀🚀🤔"
+            }
+        ]
+    },
+    {
+        "question": "¿A dónde te llevé cuando fuimos de paseo a la carretera?",
+        "answers": [
+            {
+                "answer": "Al terreno de mi familia",
+                "is_correct": true,
+                "text_if_selected": "Aún recuerdo que me fastidiabas queriéndome hacer sentir celoso de un árbol... Lo peor es que lo conseguiste un poco. ¡Mandaré a talar ese árbol!"
+            },
+            {
+                "answer": "A Súngaro",
+                "is_correct": false,
+                "text_if_selected": "Osea... sí te he llevado a Súngaro varias veces, pero ese día ni siquiera pasamos cerca de allí. 🗺️🛵 de lejitos."
+            },
+            {
+                "answer": "A Nauta",
+                "is_correct": false,
+                "text_if_selected": "No, no... Ya llegará el día en que tu abuela se ría porque sales con un moreno, pero aún no es el momento. 👦🏾"
+            },
+            {
+                "answer": "A Quistococha",
+                "is_correct": false,
+                "text_if_selected": "¡¿A ese lugar feísimo?! (según tú). Sé que si lo hubiera intentado, te bajabas de la moto y te regresabas en bus a Iquitos. 🦎🐊🚌🤣"
+            },
+            {
+                "answer": "A una quebrada a bañarnos",
+                "is_correct": false,
+                "text_if_selected": ".....No. ¿Con quién habrás ido tú a bañarte a una quebrada de la carretera?. 👀🤨🕵️‍♂️"
+            }
+        ]
+    },
+    {
+        "question": "¿Dónde fue nuestro primer beso?",
+        "answers": [
+            {
+                "answer": "En el puente Nanay",
+                "is_correct": true,
+                "text_if_selected": "Sé que es posible que nos hayamos adelantado un poco, pero ten por seguro que es un recuerdo que está grabado en mi memoria para siempre."
+            },
+            {
+                "answer": "En la plaza Serafín",
+                "is_correct": false,
+                "text_if_selected": "No, ¡cómo va a ser allí! Si hasta darme la mano te da vergüenza cuando estamos allí... 😅🙈"
+            },
+            {
+                "answer": "En la plaza al final de la alameda",
+                "is_correct": false,
+                "text_if_selected": "Osea, sí nos besamos allí varias veces... ¡pero definitivamente no fue nuestro primer beso! 🤔👀"
+            },
+            {
+                "answer": "En el mall",
+                "is_correct": false,
+                "text_if_selected": "Claro, ajá, ¿para qué? ¿Para que nos tomen otra foto de imprevisto? 📸😂🤣"
+            },
+            {
+                "answer": "No nos hemos besado",
+                "is_correct": false,
+                "text_if_selected": "Recuerda que la mentira es pecado, hermanita Karla 🐻🙏🏼🤣"
+            }
+        ]
+    },
+    {
+        "question": "¿A quién amas más?",
+        "answers": [
+            {
+                "answer": "A Dios",
+                "is_correct": true,
+                "text_if_selected": "Bien, respuesta correcta. De hecho, es la única respuesta correcta ... Me alegra mucho que tengas las cosas claras. 🙌🏼✨💖"
+            },
+            {
+                "answer": "A mí (José)",
+                "is_correct": false,
+                "text_if_selected": "¡Uy no, mal, mal, mal! ¿De qué te han servido estos primeros días de ayuno y oración entonces? ¡Prioridades, señorita! 🤦‍♂️😅🙏🏼"
+            },
+            {
+                "answer": "A tu mamá",
+                "is_correct": false,
+                "text_if_selected": "Tierno, lindo, pero no... Aunque sé que es un amor muy grande, no es la respuesta que buscaba. 👩‍👧❤️"
+            },
+            {
+                "answer": "A Berlioz",
+                "is_correct": false,
+                "text_if_selected": "Osea, sé perfectamente que elegirías a tu gato antes que a mí en cualquier situacion, pero no es la respuesta correcta hoy. 🐈🐈‍⬛🤣"
+            },
+            {
+                "answer": "A tu ex",
+                "is_correct": false,
+                "text_if_selected": "Wow, wow, wow... ¡Amiga, date cuenta! ¿Con todo lo que te hizo ese pata? Quiérete un poquito por favor, no seas imbecil. 🤮🚩🤦‍♂️"
+            }
+        ]
+    }
+    
+]

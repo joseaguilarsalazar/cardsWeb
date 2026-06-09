@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Editar Entrada | Diario{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cards.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    {% include 'sidebar.html' %}
+
+    <main class="main-content" style="display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px;">
+        
+        <div class="form-card" style="margin: 0; width: 100%;">
+            <h2>Modificar Entrada del Diario</h2>
+            
+            <form method="POST">
+                {% csrf_token %}
+                
+                <label for="title">Título de la Entrada</label>
+                <input type="text" id="title" name="title" required value="{{ card.title }}" autocomplete="off">
+                
+                <label for="text">Contenido / Reflexión espiritual</label>
+                <textarea id="text" name="text" required>{{ card.text }}</textarea>
+                
+                <label for="fecha_redaccion">Fecha correspondiente de ayuno</label>
+                <input type="date" id="fecha_redaccion" name="fecha_redaccion" required value="{{ fecha_str }}">
+                
+                <div class="form-actions" style="justify-content: space-between; margin-top: 20px;">
+                    <button type="button" class="btn-cancel" onclick="confirmarEliminacion()" style="color: var(--error); border: 1px solid var(--error); padding: 10px 20px; border-radius: 6px;">
+                        🗑️ Eliminar Entrada
+                    </button>
+                    
+                    <div style="display: flex; gap: 12px;">
+                        <a href="{% url 'home' %}" class="btn-cancel">Cancelar</a>
+                        <button type="submit" class="btn-save">Guardar Cambios</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <form id="deleteForm" method="POST" action="{% url 'delete_card' card.id %}" style="display: none;">
+            {% csrf_token %}
+        </form>
+
+    </main>
+</div>
+
+<script>
+    function confirmarEliminacion() {
+        if (confirm("¿Estás absolutamente seguro de que deseas eliminar esta entrada del diario? Esta acción no se puede deshacer y los datos encriptados se perderán.")) {
+            document.getElementById('deleteForm').submit();
+        }
+    }
+</script>
+{% endblock %}

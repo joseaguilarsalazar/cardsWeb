@@ -1,0 +1,112 @@
+/* static/css/quiz.css */
+.quiz-wrapper {
+    max-width: 550px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.quiz-card {
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.quiz-progress {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.quiz-card h2 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 30px;
+    line-height: 1.4;
+    color: var(--text-main);
+}
+
+/* Opciones de respuesta ocultando el radio button nativo */
+.quiz-option-label {
+    display: block;
+    position: relative;
+    padding: 16px 20px;
+    background-color: var(--bg-primary);
+    border: 2px solid transparent;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.quiz-option-label:hover {
+    background-color: #edf2f7;
+}
+
+/* Cuando ella hace clic en la opción (Modo Pregunta) */
+input[type="radio"]:checked + .quiz-option-label {
+    border-color: var(--accent);
+    background-color: #fff;
+}
+
+/* ESTADOS EXCLUSIVOS PARA LA PANTALLA DE REACCIÓN (FEEDBACK) */
+.quiz-option-label.selected-correct {
+    border-color: #38a169;
+    background-color: #f0fff4;
+    color: #276749;
+}
+
+.quiz-option-label.selected-incorrect {
+    border-color: var(--error);
+    background-color: #fff5f5;
+    color: #9b2c2c;
+}
+
+.quiz-option-label.disabled-option {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Hermosa caja donde se despliega tu text_if_selected debajo de la opción elegida */
+.reaction-box {
+    background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin-top: -6px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #4a5568;
+    border-left: 3px solid var(--accent);
+    animation: slideDown 0.25s ease-out;
+}
+
+.reaction-box.correct {
+    border-left-color: #38a169;
+}
+
+.reaction-box.incorrect {
+    border-left-color: var(--error);
+}
+
+.btn-quiz {
+    background-color: var(--accent);
+    color: white;
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    transition: background 0.2s ease;
+}
+
+.btn-quiz:hover {
+    background-color: #2d3748;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}

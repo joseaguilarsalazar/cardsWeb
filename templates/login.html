@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login | Secret Diary{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="login-card">
+    <h2>Bienvenido de nuevo</h2>
+    <p>Por favor, inicia sesión para ver tu espacio de trabajo.</p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert-error">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <label for="username">Nombre de usuario</label>
+        <input type="text" id="username" name="username" required autocomplete="username">
+
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" required autocomplete="current-password">
+
+        <button type="submit" class="btn-login">Iniciar Sesión</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Nueva Entrada | Diario{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cards.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+
+    {% include 'sidebar.html' %}
+
+    <main class="main-content" style="display: flex; align-items: center; justify-content: center;">
+        
+        <div class="form-card" style="margin: 0; width: 100%;">
+            <h2>Nueva Entrada del Diario</h2>
+            
+            <form method="POST">
+                {% csrf_token %}
+                
+                <label for="title">Título de la Entrada</label>
+                <input type="text" id="title" name="title" required placeholder="Ej. Día 11: Salida a la Casa de Leidy (o algo asi yo que se)" autocomplete="off">
+                
+                <label for="text">¿Qué pasó hoy? / ¿Qué hablo Dios a tu vida en este dia?</label>
+                <textarea id="text" name="text" required placeholder="Escribe aquí lo que te haya pasado, cosas que hayas reflexionado o talves simplemente algo curioso que quieras compartir conmigo."></textarea>
+                
+                <label for="fecha_redaccion">Fecha cuando escribiste esta entrada</label>
+                <input type="date" id="fecha_redaccion" name="fecha_redaccion" required>
+                
+                <div class="form-actions">
+                    <a href="{% url 'home' %}" class="btn-cancel">Cancelar</a>
+                    <button type="submit" class="btn-save">Guardar Entrada</button>
+                </div>
+            </form>
+        </div>
+
+    </main>
+</div>
+
+<script>
+    const sidebar = document.getElementById('sidebar');
+    // Nota: Si decides añadir un botón flotante o hamburguesa en esta pantalla más adelante,
+    // puedes usar esta lógica idéntica para ocultar o mostrar el menú.
+</script>
+{% endblock %}
