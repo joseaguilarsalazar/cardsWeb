@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Preguntas Frecuentes | Diario Secreto{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/faq.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    {% include 'sidebar.html' %}
+
+    <main class="main-content">
+        <div class="faq-container">
+            
+            <header class="faq-header">
+                <h1>💡 Preguntas que puedas tener</h1>
+                <p>Bienvenida a nuestro rincón digital. Aquí tienes las respuestas claras sobre cómo opera la dinámica de este diario compartido. 🩵🔐</p>
+            </header>
+
+            <div class="faq-list">
+                
+                <details>
+                    <summary>¿Por qué hay algunas entradas que se ven borrosas y no puedo abrirlas?</summary>
+                    <div class="faq-answer">
+                        <p>Bueno, esto lo programé con la idea de nuestro acuerdo original (en el que teníamos una llamada cada 30 días). Sé que mucho ha pasado desde entonces, pero la filosofía se mantiene. ⏳✨</p>
+                        <p>Lo que escribas hoy se desbloqueará para mí en 30 días (o cuando los 90 días terminen de forma definitiva).</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>¿Alguna cosa me impide escribir algo de hoy y ponerlo como de hace 30 días para que lo puedas leer de frente?</summary>
+                    <div class="faq-answer">
+                        <p>No, técnicamente nada te lo impide, pero confiaré plenamente en que usarás el sistema con total responsabilidad. Sé que tú puedes. 🧠💪🏼💖</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Espera... pero tú eres el programador, ¿cómo sé que no puedes simplemente hacer un hack y leer los mensajes antes de tiempo?</summary>
+                    <div class="faq-answer">
+                        <p>Los mensajes se guardan de forma encriptada en la base de datos. Para poder leerlos antes de tiempo tendría que sentarme a escribir varios scripts complejos aparte. 🕵️‍♂️💻❌</p>
+                        <p>Y la verdad, yo también quiero respetar esta regla con todo mi corazón. De hecho, lo programé todo así a propósito para que fuera lo más difícil posible para mí el hecho de "saltarme" la barrera de los 30 días. 🛡️🛡️</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>¿Están seguras las cosas que escriba? ¿Cómo sé que el sistema es seguro?</summary>
+                    <div class="faq-answer">
+                        <p>Totalmente seguras. En la base de datos solo existimos dos usuarios (tú y yo), y no hay ninguna interfaz ni flujo que permita crear una cuenta nueva. Además, toda la conexión al servidor viaja de forma encriptada a través de internet. 🔒✈️</p>
+                        <p>La única forma de que alguien más leyera lo que escribimos aquí es que te roben tu contraseña o que me roben la mía... pero eso no va a pasar, ¿verdad? 👀🤫🔑</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>¿Qué es eso del Día 91?</summary>
+                    <div class="faq-answer">
+                        <p>¡El gran día! Al concluir formalmente este tiempo de ayuno, absolutamente todos los mensajes diarios que falten por desbloquearse perderán el efecto borroso al instante. 🔓🎉</p>
+                        <p>Además, todas las entradas secretas y promesas especiales que hayamos estado guardando en silencio dentro del baúl del Día 91 serán finalmente accesibles para que las leamos juntos. 🥳📦👑💖</p>
+                    </div>
+                </details>
+
+            </div>
+            
+        </div>
+    </main>
+</div>
+{% endblock %}

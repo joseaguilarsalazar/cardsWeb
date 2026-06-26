@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mi Cuenta | Diario Secreto{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    {% include 'sidebar.html' %}
+
+    <main class="main-content">
+        
+        {% if messages %}
+            {% for message in messages %}
+                <div style="background-color: #f0fff4; color: #38a169; padding: 14px; border-radius: 6px; margin-bottom: 24px; border: 1px solid #c6f6d5; max-width: 850px;">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="profile-container">
+            
+            <section class="profile-section-card">
+                <h2>📈 Nuestro Progreso en el Propósito</h2>
+                <div class="stats-grid">
+                    <div class="stat-box highlight">
+                        <div class="stat-number">#{{ dias_completados }}</div>
+                        <div class="stat-label">Día de Ayuno Actual</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">{{ dias_restantes }}</div>
+                        <div class="stat-label">Días para los 90</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">📝 {{ total_entradas }}</div>
+                        <div class="stat-label">Reflexiones Guardadas</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="profile-section-card">
+                <h2>👤 Datos Generales de la Cuenta</h2>
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="form-row-group">
+                        <div class="form-field-flex">
+                            <label for="username">Nombre de Usuario</label>
+                            <input type="text" id="username" name="username" value="{{ request.user.username }}" required autocomplete="off">
+                        </div>
+                        <div class="form-field-flex">
+                            <label for="email">Correo Electrónico</label>
+                            <input type="email" id="email" name="email" value="{{ request.user.email }}" required style="width: 100%; padding: 12px; margin: 8px 0 20px 0; border: 1px solid #cbd5e0; border-radius: 6px; font-size: 1rem;">
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; flex-wrap: wrap; gap: 15px;">
+                        <a href="{% url 'change_password' %}" class="btn-profile-action btn-secundario">
+                            🔑 Cambiar Contraseña de Acceso
+                        </a>
+                        
+                        <button type="submit" class="btn-profile-action">
+                            Guardar Cambios del Perfil
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+        </div>
+    </main>
+</div>
+{% endblock %}

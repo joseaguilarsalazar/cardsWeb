@@ -3,7 +3,10 @@ from django.urls import path
 from .views import (
     login_view, home_view, logout_view, create_card_view,
     card_detail_view, edit_card_view, delete_card_view,
-    quiz_view, setup_password_view)
+    quiz_view, setup_password_view,
+    profile_view, change_password_view, faq_view,
+    timeline_view, altar_view
+    )
 
 
 urlpatterns = [
@@ -18,4 +21,12 @@ urlpatterns = [
 
     path('recuerdos/', quiz_view, name='quiz'),
     path('configurar-contrasena/', setup_password_view, name='setup_password'),
+
+    path('perfil/', profile_view, name='profile'),
+    path('perfil/cambiar-contrasena/', change_password_view, name='change_password'),
+
+    path('preguntas/', faq_view, name='faq'),
+
+    path('linea-de-tiempo/', timeline_view, name='timeline'),
+    path('altar-promesas/', altar_view, name='altar'),
 ]

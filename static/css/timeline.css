@@ -1,0 +1,41 @@
+/* static/css/timeline.css */
+.timeline-header { margin-bottom: 30px; }
+.timeline-header h1 { font-size: 1.6rem; font-weight: 500; color: var(--text-main); margin-bottom: 6px;}
+
+/* Rejilla de los 90 casilleros */
+.timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+    gap: 12px;
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.day-square {
+    height: 65px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    position: relative;
+    border: 2px solid transparent;
+}
+
+/* Colores de estados dinámicos */
+.day-square.pasado { background-color: #e2e8f0; color: var(--text-muted); }
+.day-square.hoy { background-color: #b794f4; color: white; border-color: #9f7aea; box-shadow: 0 0 12px rgba(159,122,234,0.4); }
+.day-square.futuro { background-color: #f7f9fa; color: #cbd5e0; border: 2px dashed #e2e8f0; }
+
+/* Estilo para los Hitos 30, 60, 90 (Llamadas) */
+.day-square.milestone::after {
+    content: "📞";
+    position: absolute;
+    bottom: 2px;
+    font-size: 0.65rem;
+}
+.day-square.hoy.milestone::after { content: "📱"; }

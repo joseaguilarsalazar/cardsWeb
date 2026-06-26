@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Línea de Tiempo | 90 Días{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/timeline.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    {% include 'sidebar.html' %}
+    <main class="main-content">
+        <div class="timeline-header">
+            <h1>🗓️ Linea de tiempo</h1>
+            <p style="color: var(--text-muted);">Visualización de los 90 días. Ahora mismo estamos en el <strong>Día {{ dia_actual }}</strong>.</p>
+        </div>
+
+        <section class="timeline-grid">
+            {% for dia in dias_lista %}
+                <div class="day-square {{ dia.estado }}"
+                     title="Día {{ dia.numero }}">
+                    {{ dia.numero }}
+                </div>
+            {% endfor %}
+        </section>
+    </main>
+</div>
+{% endblock %}

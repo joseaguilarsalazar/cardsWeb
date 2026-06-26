@@ -2,7 +2,11 @@
     <div class="sidebar-menu">
         <h3>📖 Menú Diario</h3>
         <a href="{% url 'home' %}" class="btn-sidebar">🏠 Página Principal</a>
+        <a href="{% url 'profile' %}" class="btn-sidebar">👤 Mi Perfil / Progreso</a>
         <a href="{% url 'create_card' %}" class="btn-sidebar">📝 Escribir Entrada</a>
+        <a href="{% url 'timeline' %}" class="btn-sidebar" style="background-color: rgba(255,255,255,0.02); border-left: 2px solid #b794f4;">🗓️ Línea de Tiempo</a>
+        <a href="{% url 'altar' %}" class="btn-sidebar" style="background-color: rgba(255,255,255,0.02); border-left: 2px solid #ecc94b;">✨ Baul Día 91</a>
+        <a href="{% url 'faq' %}" class="btn-sidebar" style="background-color: rgba(255,255,255,0.03); border-left: 2px solid #b794f4;">💡 Dudas / FAQ</a>
     </div>
     <div>
         <a href="{% url 'logout' %}" style="color: #fc8181; text-decoration: none; font-weight: 500; font-size: 0.9rem;">Cerrar Sesión</a>

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Caja Fuerte | Altar del Día 91{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/altar.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+    {% include 'sidebar.html' %}
+    <main class="main-content">
+        <div class="altar-box">
+            
+            {% if not es_dia_91_o_mas %}
+                <div class="altar-card">
+                    <h2>✨ Cofre Sellado (Día 91)</h2>
+                    <div class="badge-locked-altar">🔒 Sellado. Abre automáticamente en {{ dias_faltantes }} días.</div>
+                    <p style="line-height: 1.6; color: #4a5568;">La idea de este espacio es que pongas ideas, pensamientos u otras cosas, que se mostraran cuando este tiempo termine. En el dia 91, la idea es vernos en persona y juntos ver lo que ambos hayamos ingresado aqui.</p>
+                    
+                    {% if messages %}
+                        {% for message in messages %}<div style="background-color: #f0fff4; color: #38a169; padding: 12px; border-radius:6px; margin: 15px 0; border: 1px solid #c6f6d5;">{{ message }}</div>{% endfor %}
+                    {% endif %}
+
+                    <form method="POST" class="promise-input-box">
+                        {% csrf_token %}
+                        <input type="hidden" name="guardar_promesa" value="true">
+                        <label for="promise_text">Depositar una Palabra en la Caja Fuerte</label>
+                        <textarea id="promise_text" name="promise_text" required placeholder="Escribe aquí esa promesa que deseas resguardar bajo llave para nuestro mañana..." style="width:100%; min-height:120px; padding:12px; margin-top:8px; border-radius:6px; border:1px solid #cbd5e0; resize:vertical;"></textarea>
+                        <button type="submit" class="btn-save" style="background-color:#ecc94b; color:#744210; margin-top:10px; width:100%; padding:14px;">🫙 Sellar y Depositar Palabra</button>
+                    </form>
+
+                    <h4 style="margin-top: 35px; margin-bottom: 12px; font-weight: 500; color: var(--text-main);">Tus Depósitos actuales:</h4>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">Has custodiado <strong>{{ conteo_mis_promesas }} palabras</strong> en el cofre. Permanecen completamente encriptadas y ocultas para ambos.</p>
+                </div>
+
+            {% else %}
+                <div class="altar-card" style="border-top-color: {% if altar_desbloqueado %}#38a169{% else %}#ecc94b{% endif %};">
+                    <h2>🔓 El Altar de Promesas Revelado</h2>
+                    
+                    {% if messages %}
+                        {% for message in messages %}<div style="background-color: #fff5f5; color: var(--error); padding: 12px; border-radius:6px; margin-bottom: 15px; border: 1px solid #fed7d7;">{{ message }}</div>{% endfor %}
+                    {% endif %}
+
+                    {% if not altar_desbloqueado %}
+                        <p style="line-height: 1.6;">¡Los 90 días han terminado! El cofre está frente a ustedes, pero para abrirlo se requiere un último acto de mutuo acuerdo. <strong>Ambos deben introducir sus contraseñas en este instante</strong> para leer juntos lo que Dios habló en el anonimato.</p>
+                        
+                        <form method="POST" class="vault-lock-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="verificar_llaves" value="true">
+                            
+                            <div>
+                                <label>Llave de {{ request.user.username }} (Tú)</label>
+                                <input type="password" name="password_mine" required placeholder="Tu contraseña actual">
+                            </div>
+                            <div>
+                                <label>Llave de {% if pareja %}{{ pareja.username }}{% else %}Solange{% endif %} (Tu Pareja)</label>
+                                <input type="password" name="password_partner" required placeholder="Contraseña de tu pareja">
+                            </div>
+                            <button type="submit" class="btn-unlock-vault">🗝️ Abrir Altar en Presencia Mutua</button>
+                        </form>
+
+                    {% else %}
+                        <p style="color: var(--text-muted); margin-bottom: 20px;">Las llaves han coincidido perfectamente. Aquí se despliega, lado a lado, la memoria de las promesas guardadas en la intimidad de su fe:</p>
+                        
+                        <div class="promises-chat-grid">
+                            {% for promesa in todas_las_promesas %}
+                                <div class="bubble-container {% if promesa.owner == request.user %}mine{% else %}partner{% endif %}">
+                                    <div class="promise-bubble">
+                                        <span class="bubble-author">{{ promesa.owner.username }} · {{ promesa.created_at|date:"d/m/Y" }}</span>
+                                        <p style="white-space: pre-line;">{{ promesa.text }}</p>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <p style="color: var(--text-muted); text-align: center;">Curiosamente, el cofre se abrió pero no se encontraron registros guardados. ¡Lo importante es que completaron el viaje! ✨</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+        </div>
+    </main>
+</div>
+{% endblock %}

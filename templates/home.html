@@ -48,7 +48,7 @@
                         <p style="white-space: pre-line; line-height: 1.6; color: var(--text-main);">{{ entrada.text|truncatechars:100 }}</p>
                     </article>
                 {% empty %}
-                    <p style="color: var(--text-muted);">Aún no has escrito ninguna entrada. ¡Presiona el botón de la barra lateral!</p>
+                    <p style="color: var(--text-muted);">Aún no has escrito ninguna entrada. ¡Presiona el botón de la barra lateral! 📝</p>
                 {% endfor %}
             </div>
         </section>
@@ -86,7 +86,7 @@
                     {% endif %}
                     
                 {% empty %}
-                    <p style="color: var(--text-muted);">Tu pareja aún no ha cargado registros o datos disponibles.</p>
+                    <p style="color: var(--text-muted);">Tu pareja aún no ha cargado registros o datos disponibles. ✨</p>
                 {% endfor %}
             </div>
         </section>
@@ -95,13 +95,14 @@
 </div>
 
 <script>
-    // La lógica de la interfaz sigue respondiendo perfectamente al componente incluido
     const sidebar = document.getElementById('sidebar');
     const toggleBtn = document.getElementById('toggleSidebarBtn');
 
-    toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('hidden');
-    });
+    if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+        });
+    }
 
     function switchTab(tabName) {
         document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));

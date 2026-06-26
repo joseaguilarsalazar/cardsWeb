@@ -1,0 +1,85 @@
+/* static/css/faq.css */
+.faq-container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.faq-header {
+    margin-bottom: 32px;
+}
+
+.faq-header h1 {
+    font-size: 1.7rem;
+    font-weight: 500;
+    color: var(--text-main);
+    margin-bottom: 8px;
+}
+
+.faq-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Estilo para las tarjetas colapsables nativas */
+details {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    border-left: 4px solid var(--accent);
+    transition: all 0.2s ease;
+}
+
+details[open] {
+    border-left-color: #b794f4; /* Tono lila cuando se expande */
+    background-color: #ffffff;
+}
+
+/* El elemento summary actúa como la cabecera/pregunta ejecutable */
+summary {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text-main);
+    cursor: pointer;
+    list-style: none; /* Oculta la flecha nativa aburrida del navegador */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+/* Añadimos un indicador dinámico manual usando CSS */
+summary::after {
+    content: "➕";
+    font-size: 0.9rem;
+    transition: transform 0.2s ease;
+}
+
+details[open] summary::after {
+    content: "➖";
+}
+
+/* El contenedor del texto oculto / Respuesta */
+.faq-answer {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--bg-primary);
+    line-height: 1.7;
+    color: #4a5568;
+    font-size: 1rem;
+}
+
+.faq-answer p {
+    margin-bottom: 12px;
+}
+
+.faq-answer p:last-child {
+    margin-bottom: 0;
+}

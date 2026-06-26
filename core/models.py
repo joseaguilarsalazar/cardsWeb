@@ -106,3 +106,36 @@ class SafetyAnswer(models.Model):
 
     def __str__(self):
         return self.answer
+    
+class AltarEntry(models.Model):
+    text_encrypted = models.TextField(db_column='text')
+    created_at = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Promesa de {self.owner.username} - {self.created_at.strftime('%d/%m/%Y')}"
+
+    def _get_cipher(self):
+        import base64
+        from cryptography.fernet import Fernet
+        key = settings.SECRET_KEY[:32].encode('utf-8')
+        encoded_key = base64.urlsafe_b64encode(key)
+        return Fernet(encoded_key)
+
+    @property
+    def text(self):
+        if not self.text_encrypted:
+            return ""
+        try:
+            from cryptography.fernet import Fernet
+            cipher = self._get_cipher()
+            return cipher.decrypt(self.text_encrypted.encode('utf-8')).decode('utf-8')
+        except Exception:
+            return "[Error al desencriptar promesa]"
+
+    @text.setter
+    def text(self, value):
+        if value:
+            from cryptography.fernet import Fernet
+            cipher = self._get_cipher()
+            self.text_encrypted = cipher.encrypt(value.encode('utf-8')).decode('utf-8')
