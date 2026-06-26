@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: diary_db
+    restart: always
+    environment:
+      POSTGRES_DB: diary_production_db
+      POSTGRES_USER: jose_admin
+      POSTGRES_PASSWORD: TuContraseñaSuperSeguraDeBaseDeDatos
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jose_admin -d diary_production_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    container_name: diary_web
+    restart: always
+    ports:
+      - "8001:8001" # <- Expone el puerto directamente al VPS host
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db
+      - DB_NAME=diary_production_db
+      - DB_USER=jose_admin
+      - DB_PASSWORD=TuContraseñaSuperSeguraDeBaseDeDatos
+    volumes:
+      # Mapea los estáticos desde el contenedor hacia una carpeta física real en el VPS host
+      - /var/www/diario_static:/app/staticfiles
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
