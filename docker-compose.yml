@@ -6,20 +6,18 @@ services:
     env_file:
       - .env
     environment:
-      # 🌟 Se acopla dinámicamente a las variables de tu archivo .env
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - diary_postgres_data:/var/lib/postgresql/data # 🌟 Cambiado a un nombre único
     healthcheck:
-      # 🌟 Corregido para usar las variables internas del contenedor de forma dinámica
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 5s
       timeout: 5s
       retries: 5
     networks:
-      - diary_internal # 🔒 La DB solo habla con el entorno interno del diario
+      - diary_internal
 
   web:
     build: .
@@ -35,14 +33,13 @@ services:
       db:
         condition: service_healthy
     networks:
-      - diary_internal # 🔒 Conecta con la base de datos de forma aislada
-      - artdance_network # 🌐 Conecta con el contenedor maestro de Caddy
+      - diary_internal
+      - artdance_network
 
 volumes:
-  postgres_data:
+  diary_postgres_data: # 🌟 Nombre único e independiente para este cofre secreto
 
-# Definición global de las redes externas e internas
 networks:
   diary_internal: 
   artdance_network:
-    external: true # 🌐 Indica que pertenece al puente global compartido del VPS
+    external: true
