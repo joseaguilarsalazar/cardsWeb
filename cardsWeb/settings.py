@@ -143,7 +143,7 @@ CSRF_COOKIE_SECURE = True           # Las cookies anti-falsificación solo viaja
 SESSION_COOKIE_HTTPONLY = True      # Bloquea el acceso a la cookie desde JavaScript malicioso [cite: 2304]
 
 # ⏳ Recordatorio: Tus Sesiones Rodantes de 24 Horas
-SESSION_ENGINE = 'django.contrib.sessions.backends.db' [cite: 2299]
+SESSION_ENGINE = 'django.contrib.sessions.backends.db' #[cite: 2299]
 SESSION_COOKIE_AGE = 86400          # Duración de 24 horas en segundos [cite: 2310]
 SESSION_SAVE_EVERY_REQUEST = True    # Resetea el reloj de las 24h con cada interacción [cite: 2311]
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
