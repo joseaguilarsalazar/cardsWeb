@@ -1,5 +1,5 @@
 services:
-  db:
+  diary_db_service: # 🌟 Cambiado de 'db' a 'diary_db_service' para evitar colisiones
     image: postgres:16-alpine
     container_name: diary_db
     restart: always
@@ -10,7 +10,7 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - diary_postgres_data:/var/lib/postgresql/data # 🌟 Cambiado a un nombre único
+      - diary_postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 5s
@@ -30,14 +30,14 @@ services:
     volumes:
       - /var/www/diario_static:/app/staticfiles
     depends_on:
-      db:
+      diary_db_service: # 🌟 Apunta al nuevo nombre del servicio
         condition: service_healthy
     networks:
       - diary_internal
       - artdance_network
 
 volumes:
-  diary_postgres_data: # 🌟 Nombre único e independiente para este cofre secreto
+  diary_postgres_data:
 
 networks:
   diary_internal: 
