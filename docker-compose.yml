@@ -3,14 +3,18 @@ services:
     image: postgres:16-alpine
     container_name: diary_db
     restart: always
+    env_file:
+      - .env
     environment:
-      POSTGRES_DB: diary_production_db
-      POSTGRES_USER: jose_admin
-      POSTGRES_PASSWORD: TuContraseñaSuperSeguraDeBaseDeDatos
+      # 🌟 Se acopla dinámicamente a las variables de tu archivo .env
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U jose_admin -d diary_production_db"]
+      # 🌟 Corregido para usar las variables internas del contenedor de forma dinámica
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -25,11 +29,6 @@ services:
       - "8001:8001"
     env_file:
       - .env
-    environment:
-      - DB_HOST=db
-      - DB_NAME=diary_production_db
-      - DB_USER=jose_admin
-      - DB_PASSWORD=TuContraseñaSuperSeguraDeBaseDeDatos
     volumes:
       - /var/www/diario_static:/app/staticfiles
     depends_on:
@@ -42,8 +41,8 @@ services:
 volumes:
   postgres_data:
 
-# 🌟 LA SOLUCIÓN: Definición global de las redes al mismo nivel que 'services'
+# Definición global de las redes externas e internas
 networks:
-  diary_internal: # <-- Creación de la red interna que le faltaba a tu archivo
+  diary_internal: 
   artdance_network:
-    external: true # <-- Le indica a Docker que esta red ya existe en el VPS
+    external: true # 🌐 Indica que pertenece al puente global compartido del VPS
