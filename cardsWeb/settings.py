@@ -24,7 +24,7 @@ SECRET_KEY = env('SECRET_KEY', default='your-default-secret-key')
 DEBUG = env.bool('DEBUG', default=True)
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS = ['https://sharedentries.mishu-soft.org']
 
 # Application definition
 
@@ -132,4 +132,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SESSION_COOKIE_AGE = 86400
 SESSION_SAVE_EVERY_REQUEST = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+
+# 🔒 Protocolos de Seguridad para Tráfico Cifrado HTTPS
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True          # Redirige automáticamente HTTP a HTTPS
+SESSION_COOKIE_SECURE = True        # Las cookies de sesión solo viajan por HTTPS
+CSRF_COOKIE_SECURE = True           # Las cookies anti-falsificación solo viajan por HTTPS
+SESSION_COOKIE_HTTPONLY = True      # Bloquea el acceso a la cookie desde JavaScript malicioso [cite: 2304]
+
+# ⏳ Recordatorio: Tus Sesiones Rodantes de 24 Horas
+SESSION_ENGINE = 'django.contrib.sessions.backends.db' [cite: 2299]
+SESSION_COOKIE_AGE = 86400          # Duración de 24 horas en segundos [cite: 2310]
+SESSION_SAVE_EVERY_REQUEST = True    # Resetea el reloj de las 24h con cada interacción [cite: 2311]
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
