@@ -16,6 +16,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - diary_internal
 
   web:
     build: .
@@ -36,6 +38,11 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - diary_internal
+      - artdance_network
 
 volumes:
   postgres_data:
+  artdance_network:
+    external: true
