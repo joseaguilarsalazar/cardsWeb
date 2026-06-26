@@ -31,7 +31,7 @@ class Command(BaseCommand):
 
         # 2. Create Her User (The Partner)
         her_username = "soldurand"    # Change this to her preferred username
-        her_email = "her@example.com"
+        her_email = "solangedurandvel@gmail.com"
 
         if not User.objects.filter(username=her_username).exists():
             her_user = User.objects.create_user(
